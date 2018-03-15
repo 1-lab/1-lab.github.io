@@ -2,17 +2,6 @@
 title: "Markdown Common Elements"
 layout: post
 date: 2016-02-24 22:44
-<<<<<<< HEAD
-# tag:
-# - markdown
-# - elements
-blog: true
-draft: true
-author: artiannaswamy
-summary: "A list of the most common markdown elements and how they look"
-permalink: markdown-common-elements
-
-=======
 image: /assets/images/markdown.jpg
 headerImage: false
 tag:
@@ -22,7 +11,6 @@ star: true
 category: blog
 author: johndoe
 description: Markdown summary with different options
->>>>>>> gh-pages
 ---
 
 ## Summary:

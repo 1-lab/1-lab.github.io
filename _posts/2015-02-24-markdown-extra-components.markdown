@@ -2,17 +2,6 @@
 title: "Markdown Extra Components"
 layout: post
 date: 2016-02-24 22:48
-<<<<<<< HEAD
-# tag:
-# - markdown
-# - components
-# - extra
-blog: true
-draft: true
-author: artiannaswamy
-summary: "Extra markdown components like highlighted text, side-by-side items, starring/highlighting a blog or project, and embedding gists, videos etc"
-permalink: markdown-extra-components
-=======
 image: /assets/images/markdown.jpg
 headerImage: false
 tag:
@@ -23,7 +12,6 @@ category: blog
 author: jamesfoster
 description: Markdown summary with different options
 # jemoji: '<img class="emoji" title=":ramen:" alt=":ramen:" src="https://assets.github.com/images/icons/emoji/unicode/1f35c.png" height="20" width="20" align="absmiddle">'
->>>>>>> gh-pages
 ---
 
 ## Summary:
@@ -35,6 +23,7 @@ You can pick as item to see how to apply in markdown.
 - [Side-by-Side](#side-by-side)
 - [Star](#star)
 - [Especial Breaker](#especial-breaker)
+- [Spoiler](#spoiler)
 
 #### External Elements
 - [Gist](#gist)
@@ -63,36 +52,54 @@ Like the [Medium](https://medium.com/) component.
 **Image** on the left and **Text** on the right:
 
 {% highlight html %}
-<div class="side-by-side clearfix">
-    <img class="left-image" src="http://kune.fr/wp-content/uploads/2013/10/ghost-blog.jpg" alt="Alt Text">
-    <figcaption class="caption">Photo by John Doe</figcaption>
-    <p class="right-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<div class="side-by-side">
+    <div class="toleft">
+        <img class="image" src="{{ site.url }}/{{ site.picture }}" alt="Alt Text">
+        <figcaption class="caption">Photo by John Doe</figcaption>
+    </div>
+
+    <div class="toright">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </div>
 </div>
 {% endhighlight %}
 
-<div class="side-by-side clearfix">
-    <img class="left-image" src="http://kune.fr/wp-content/uploads/2013/10/ghost-blog.jpg" alt="Alt Text">
-    <figcaption class="caption">Photo by John Doe</figcaption>
-    <p class="right-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<div class="side-by-side">
+    <div class="toleft">
+        <img class="image" src="{{ site.url }}/{{ site.picture }}" alt="Alt Text">
+        <figcaption class="caption">Photo by John Doe</figcaption>
+    </div>
+
+    <div class="toright">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </div>
 </div>
 
 **Text** on the left and **Image** on the right:
 
 {% highlight html %}
-<div class="side-by-side clearfix">
-    <p class="left-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-    <img class="right-image" src="http://kune.fr/wp-content/uploads/2013/10/ghost-blog.jpg" alt="Alt Text">
-    <figcaption class="caption">Photo by John Doe</figcaption>
+<div class="side-by-side">
+    <div class="toleft">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </div>
+
+    <div class="toright">
+        <img class="image" src="{{ site.url }}/{{ site.picture }}" alt="Alt Text">
+        <figcaption class="caption">Photo by John Doe</figcaption>
+    </div>
 </div>
 {% endhighlight %}
 
-<div class="side-by-side clearfix">
-    <p class="left-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-    <img class="right-image" src="http://kune.fr/wp-content/uploads/2013/10/ghost-blog.jpg" alt="Alt Text">
-    <figcaption class="caption">Photo by John Doe</figcaption>
-</div>
+<div class="side-by-side">
+    <div class="toleft">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </div>
 
-**IMPORTANT**: don't forget the 'clearfix' class for the div element.
+    <div class="toright">
+        <img class="image" src="{{ site.url }}/{{ site.picture }}" alt="Alt Text">
+        <figcaption class="caption">Photo by John Doe</figcaption>
+    </div>
+</div>
 
 ---
 
@@ -118,15 +125,27 @@ You can add a especial *hr* to your text.
 
 ---
 
+## Spoiler
+
+You can add an especial hidden content that appears on hover.
+
+{% highlight html %}
+<div class="spoiler"><p>your content</p></div>
+{% endhighlight %}
+
+<div class="spoiler"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></div>
+
+---
+
 ## Gist
 
 You can add Gists from github.
 
 {% highlight raw %}
-{ % gist sergiokopplin/a344e39fef90e453c22815493475937c % }
+{ % gist sergiokopplin/91ff4220480727b47224245ee2e9c291 % }
 {% endhighlight %}
 
-{% gist sergiokopplin/a344e39fef90e453c22815493475937c %}
+{% gist sergiokopplin/91ff4220480727b47224245ee2e9c291 %}
 
 ---
 

@@ -1,101 +1,84 @@
 # main text of home
-name: Niveditha Ram
-bio: 'Physics, Teaching, Engineering.'
+name: Sangkyu
+bio: A Man who travels the daydream
 
 # twitter summary info
-description: A blog about Physics and teaching science
+description: A blog about technology and stuff related
 
 # if it's an external image, update below for true
 # better with square images
 external-image: false
-picture: 'assets/images/profile.jpg'
+picture: assets/images/profile.jpg
 
-<<<<<<< HEAD
-# url: http://artiannaswamy.com
-=======
 # If you want to include your resume, set to true
 # and specify source (external or local).
 resume: true
 resume-external: true
 resume-url: https://google.com/?q=my+resume
 
-url: https://koppl.in/indigo
->>>>>>> gh-pages
+url: https://1-lab.github.io/indigo
 # your url: http://USERNAME.github.io
 
 permalink: /:title/
 
 # To enable google analytics, supply your token below
-#analytics-google: 'UA-74313908-1'
+# analytics-google: 'UA-MYANALYTICS'
 
-<<<<<<< HEAD
-# if you don't want comments in your posts, set to false
-#disqus: artiannaswamy
-=======
+# To enable piwik tracking, supply your url & site ID below
+# analytics-piwik-url: 'piwik.my-host.com'
+# analytics-piwik-id: 1
+
 # if you don't want comments in your posts, leave categories empty
 disqus:
   shortname: mydisqus # enter this from your disqus account
   categories: [blog, project] # only show disqus for posts that have these categories
->>>>>>> gh-pages
 
 # if you don't have any of social below, comment the line
-# facebook: myfacebook
-twitter: NivedithaRam
+facebook: quicksilversangkyu
+# twitter: mytwitter
 # google: mygoogle
-# instagram: myinstagram
-<<<<<<< HEAD
-#pinterest: annasw
-#linkedin: artiannaswamy
-# youtube: myyoutube
-# spotify: myspotify
-github: NivedithaRam
-# medium: medium
-email: niveditha.ramasubramanian@stonybrook.edu
-=======
-# pinterest: mypinterest
+instagram: quicksilversangkyu
+pinterest: sangkyulab
 # linkedin: mylinkedin
-# youtube: myyoutube
+youtube: qsilverr7
 # spotify: myspotify
-github: mygithub
+github: 1-lab
 # lastfm: mylastfm
 # stackoverflow: 7044681/mystackoverflow
 # quora: userquora
 # reddit: username
-medium: medium
+medium: qsilver7
 # vimeo: myvimeo
 # lanyrd: mylanyrd
-email: myemail@gmail.com
->>>>>>> gh-pages
+email: qsilver7@gmail.com
 
 authors:
-    NivedithaRam:
-        name: Niveditha Ram
-        bio: Physics, Reading, Teaching.
+    johndoe:
+        name: John Doe
+        bio: A Man who travels the world eating noodles
         external-image: false
         picture: assets/images/profile.jpg
-        twitter: NivedithaRam
-
+        twitter: johndoe
+    jamesfoster:
+        name: James Foster
+        bio: A Man who develops software with coffee
+        external-image: false
+        picture: assets/images/james.jpg
+        twitter: jamesfoster
 
 # do you want a larger site? change the option below
 # options: [normal, large] | default: normal
 # normal = 560px / large = 810px
-width: large
+width: normal
 
 # if you don't need pagination, comment the *paginate* configs below
 # paginate: 5
 # paginate_path: "blog/:num/"
 
 # if you don't need projects, comment the *projects* configs below
-<<<<<<< HEAD
-# projects: true
-research: true
-teaching: true
-# if you don't need about or blog, comment them out below
-=======
 projects: true
 
 # if you don't need "about" or "blog", comment them out below
->>>>>>> gh-pages
 about: true
 blog: true
 
@@ -108,13 +91,8 @@ show-tags: true
 # related posts inside a post?
 related: true
 
-<<<<<<< HEAD
-# show next & prev links in blog post?
-blog-nav-links: true
-=======
 # Display links for next and previous posts for the specified categories
 post-advance-links: [blog]
->>>>>>> gh-pages
 
 # show author block at the end of a post ?
 show-author: true
@@ -129,12 +107,5 @@ plugins:
   - jemoji
   - jekyll-admin
 
-<<<<<<< HEAD
-#jekyll-mentions:
-    #base_url: http://artiannaswamy.com
-
-exclude: [README.md, Gemfile, Gemfile.lock, node_modules, gulpfile.js, package.json, _site, src, vendor, CNAME, indigo-gh-pages.zip, Rakefile, screen-shot.png, travis.sh, tasks]
-=======
 jekyll-mentions:
     base_url: https://github.com
->>>>>>> gh-pages
