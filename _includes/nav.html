@@ -39,6 +39,15 @@
                 </li>
             {% endif %}
         {% endif %}
+<<<<<<< HEAD
                 
+=======
+
+        {% if site.resume == true %}
+            <li class="item">
+                <a class="link" href="{% if site.resume-external %}{{ site.resume-url }}{% else %}{{ site.url }}/{{ site.resume-url }}{% endif %}">Résumé</a>
+            </li>
+        {% endif %}
+>>>>>>> gh-pages
     </ul>
 </nav>
