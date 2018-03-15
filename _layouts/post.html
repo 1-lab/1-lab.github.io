@@ -20,8 +20,6 @@ layout: default
 
 {{content}}
 
-<<<<<<< HEAD
-=======
 {% if site.post-advance-links contains page.category %}
     <div class="blog-navigation">
         {% if page.previous.url %}
@@ -35,19 +33,12 @@ layout: default
     </div>
 {% endif %}
 
->>>>>>> gh-pages
 {% if site.related %}
     {% include related.html %}
 {% endif %}
 
 {% include author.html %}
 
-<<<<<<< HEAD
-{% include disqus.html %}
-
-{% include footer.html %}
-=======
 {% if site.disqus.categories contains page.category %}
     {% include disqus.html %}
 {% endif %}
->>>>>>> gh-pages
