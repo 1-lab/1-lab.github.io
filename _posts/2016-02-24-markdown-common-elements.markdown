@@ -8,7 +8,7 @@ projects: true
 tag:
 - markdown
 - elements
-star: true
+star: false
 category: project
 author: johndoe
 description: Markdown summary with different options
