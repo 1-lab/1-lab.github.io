@@ -34,20 +34,20 @@ disqus:
   categories: [blog, project] # only show disqus for posts that have these categories
 
 # if you don't have any of social below, comment the line
+medium: qsilver7
+pinterest: sangkyulab
+youtube: qsilverr7
+instagram: quicksilversangkyu
 facebook: quicksilversangkyu
 # twitter: mytwitter
 # google: mygoogle
-instagram: quicksilversangkyu
-pinterest: sangkyulab
 # linkedin: mylinkedin
-youtube: qsilverr7
 # spotify: myspotify
-github: 1-lab
+# github: 1-lab
 # lastfm: mylastfm
 # stackoverflow: 7044681/mystackoverflow
 # quora: userquora
 # reddit: username
-medium: qsilver7
 # vimeo: myvimeo
 # lanyrd: mylanyrd
 email: qsilver7@gmail.com
