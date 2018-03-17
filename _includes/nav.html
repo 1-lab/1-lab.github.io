@@ -6,14 +6,6 @@
             </li>
         {% endif %}
         
-         {% if site.about == true %}
-            {% if page.title != "About" %}
-                <li class="item">
-                    <a class="link" href="{{ site.url }}/about">About</a>
-                </li>
-            {% endif %}
-        {% endif %}
-
         {% if site.blog == true %}
             {% if page.title != "Blog" %}
                 <li class="item">
@@ -35,5 +27,14 @@
                 <a class="link" href="{% if site.resume-external %}{{ site.resume-url }}{% else %}{{ site.url }}/{{ site.resume-url }}{% endif %}">Résumé</a>
             </li>
         {% endif %}
+        
+        {% if site.about == true %}
+            {% if page.title != "About" %}
+                <li class="item">
+                    <a class="link" href="{{ site.url }}/about">About</a>
+                </li>
+            {% endif %}
+        {% endif %}
+
     </ul>
 </nav>
