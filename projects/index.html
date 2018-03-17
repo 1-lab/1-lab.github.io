@@ -9,7 +9,7 @@ title: Projects
 		<p class="text-center">Nothing published yet!</p>
 	{% elsif site.paginate %}
 		{% for post in paginator.posts %}
-			{% if post.category == 'projects' %}
+			{% if post.category == 'project' %}
 				{% if post.hidden != true %}
 					{% include blog-post.html %}
 				{% endif %}
@@ -19,7 +19,7 @@ title: Projects
 		{% include pagination.html%}
 	{% else %}
 		{% for post in site.posts %}
-			{% if post.category == 'projects' %}
+			{% if post.category == 'project' %}
 				{% if post.hidden != true %}
 					{% include blog-post.html %}
 				{% endif %}
