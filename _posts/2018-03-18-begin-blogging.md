@@ -1,5 +1,5 @@
 ---
-title: "Begin blogging"
+title: "Begin Again"
 layout: post
 date: 2018-03-18 00:00
 image: /assets/images/markdown.jpg
