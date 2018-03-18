@@ -14,7 +14,7 @@ description:
 
 작년에 밤잠을 설쳐가며 번역한 책이 드디어 출간되었습니다.
 
-<img class="image" src="https://1-lab.github.io/_posts/images/intro-my-book.png" alt="yes24 book information">
+<img class="image" src="https://github.com/1-lab/1-lab.github.io/blob/master/_posts/images/intro-my-book.png?raw=true" alt="yes24 book information">
 <figcaption class="caption">출처: yes24.com</figcaption>
 
 <img class="image" src="https://1-lab.github.io/_posts/images/comments-on-my-book.png" alt="book review">
