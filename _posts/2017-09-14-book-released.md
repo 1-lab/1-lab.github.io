@@ -1,5 +1,5 @@
 ---
-title: "실험을 배우는 어린이 전자공학 출간"
+title: "실험으로 배우는 어린이 전자공학 출간"
 layout: post
 date: 2017-09-14 00:00
 headerImage: true
