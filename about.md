@@ -16,7 +16,7 @@ layout: page
 	<li>Machine Learning</li>
 	<li>Embedded System</li>
 	<li>Linux Kernel - BSP</li>
-	<li>C++ - C - ASM</li>
+	<li>C - C++ - ASM</li>
 	<li>Python</li>
     <li>ReactJS - VueJS - NodeJS</li>
 	<li>Git</li>
@@ -26,5 +26,5 @@ layout: page
 <h2>Projects</h2>
 
 <ul>
-	<li><a href="https://1-lab.github.io//markdown-extra-components/">Sample Page</a></li>
+	<li><a href="https://1-lab.github.io/book-released/">실험으로 배우는 어린이 전자공학</a></li>
 </ul>
