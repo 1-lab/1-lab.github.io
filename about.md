@@ -10,14 +10,13 @@ layout: page
 <h2>Skills</h2>
 
 <ul class="skill-list">
-	<li>Software Architecture Design & Analysis</li>
+	<li>Software Architecture Design and Analysis</li>
 	<li>Machine Learning</li>
 	<li>Embedded System</li>
 	<li>Linux Kernel - BSP</li>
-	<li>C - C++ - ASM</li>
+	<li>C++ - C - ASM</li>
 	<li>Python</li>
-    <li>ReactJS - NodeJS</li>
-    <li>VueJSJS</li>
+    <li>ReactJS - VueJS - NodeJS</li>
 	<li>Git</li>
 	<li>Scrum and Kanban</li>
 </ul>
@@ -25,5 +24,5 @@ layout: page
 <h2>Projects</h2>
 
 <ul>
-	<li><a href="https://1-lab.github.io//markdown-extra-components/">Sample Project</a></li>
+	<li><a href="https://1-lab.github.io//markdown-extra-components/">Sample Page</a></li>
 </ul>
