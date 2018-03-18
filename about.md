@@ -11,11 +11,11 @@ layout: page
 <h2>Skills</h2>
 
 <ul class="skill-list">
-	<li>Software Architect - Architecture Design & Analysis</li>
+	<li>Software Architecture Design & Analysis</li>
 	<li>Machine Learning</li>
-	<li>C - C++ - ASM</li>
 	<li>Embedded System</li>
 	<li>Linux Kernel - BSP</li>
+	<li>C - C++ - ASM</li>
 	<li>Python</li>
     <li>ReactJS - NodeJS</li>
     <li>VueJSJS</li>
