@@ -17,5 +17,5 @@ description:
 <img class="image" src="https://github.com/1-lab/1-lab.github.io/blob/master/_posts/images/intro-my-book.png?raw=true" alt="yes24 book information">
 <figcaption class="caption">출처: yes24.com</figcaption>
 
-<img class="image" src="https://1-lab.github.io/_posts/images/comments-on-my-book.png" alt="book review">
+<img class="image" src="https://github.com/1-lab/1-lab.github.io/blob/master/_posts/images/comments-on-my-book.png?raw=true" alt="book review">
 <figcaption class="caption">출처: yes24.com</figcaption>
