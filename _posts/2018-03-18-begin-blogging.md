@@ -1,3 +1,18 @@
+---
+title: "Begin blogging"
+layout: post
+date: 2018-03-18 00:00
+image: /assets/images/markdown.jpg
+headerImage: true
+projects: true
+tag:
+- markdown
+- components
+- extra
+category: project
+author: Sangkyu
+description: 
+---
 
 얼마전 출판사에서 일하는 친구의 소개로 어린이 책의 번역을 경험하면서 글쓰기 대한 관심을 갖게 되었습니다.
 
