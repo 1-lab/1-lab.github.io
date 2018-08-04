@@ -13,7 +13,11 @@ div {
 #info {
   font: 16px 'Lucida Grande', sans-serif;
 }
-.lefside-block {
+.leftside-block {
+  display: block;
+  margin: auto;
+}
+.rightside-block {
   display: block;
   margin: auto;
 }
