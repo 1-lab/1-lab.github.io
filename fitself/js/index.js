@@ -15,7 +15,6 @@ let canvasOutputCtx = canvasOutput.getContext('2d');
 let stream = null;
 
 let detectFace = document.getElementById('face');
-let detectEye = document.getElementById('eye');
 
 let info = document.getElementById('info');
 
@@ -96,47 +95,17 @@ function processVideo() {
   if (detectFace.checked) {
     let faceVect = new cv.RectVector();
     let faceMat = new cv.Mat();
-    if (detectEye.checked) {
-      cv.pyrDown(grayMat, faceMat);
-      size = faceMat.size();
-    } else {
-      cv.pyrDown(grayMat, faceMat);
-      if (videoWidth > 320)
-        cv.pyrDown(faceMat, faceMat);
-      size = faceMat.size();
-    }
+    cv.pyrDown(grayMat, faceMat);
+    if (videoWidth > 320)
+      cv.pyrDown(faceMat, faceMat);
+    size = faceMat.size();
     faceClassifier.detectMultiScale(faceMat, faceVect);
     for (let i = 0; i < faceVect.size(); i++) {
       let face = faceVect.get(i);
       faces.push(new cv.Rect(face.x, face.y, face.width, face.height));
-      if (detectEye.checked) {
-        let eyeVect = new cv.RectVector();
-        let eyeMat = faceMat.roi(face);
-        eyeClassifier.detectMultiScale(eyeMat, eyeVect);
-        for (let i = 0; i < eyeVect.size(); i++) {
-          let eye = eyeVect.get(i);
-          eyes.push(new cv.Rect(face.x + eye.x, face.y + eye.y, eye.width, eye.height));
-        }
-        eyeMat.delete();
-        eyeVect.delete();
-      }
     }
     faceMat.delete();
     faceVect.delete();
-  } else {
-    if (detectEye.checked) {
-      let eyeVect = new cv.RectVector();
-      let eyeMat = new cv.Mat();
-      cv.pyrDown(grayMat, eyeMat);
-      size = eyeMat.size();
-      eyeClassifier.detectMultiScale(eyeMat, eyeVect);
-      for (let i = 0; i < eyeVect.size(); i++) {
-        let eye = eyeVect.get(i);
-        eyes.push(new cv.Rect(eye.x, eye.y, eye.width, eye.height));
-      }
-      eyeMat.delete();
-      eyeVect.delete();
-    }
   }
   canvasOutputCtx.drawImage(canvasInput, 0, 0, videoWidth, videoHeight);
   drawResults(canvasOutputCtx, faces, 'red', size);
