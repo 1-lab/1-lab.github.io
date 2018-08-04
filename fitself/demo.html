@@ -25,24 +25,29 @@
 <div id="info" class="text-center">
   loading...
 </div>
-<h1 class="w3-jumbo"><b>FIT.SELF</b></h1>
-<p>Your Personal Trainer at Home</p>
-<table cellspacing="0" cellpadding="0">
-  <tr>
-    <td>
-      <div id="videocontainer">
-        <video width="50%" controls>
-          <source src="fitself.mp4" type="video/mp4">
-          Your browser does not support HTML5 video.
-        </video>
-      </div>
-    </td>
-    <td>
-      <div id="container">
-        <canvas class="rightside-block" id="canvasOutput" width=50%></canvas>
-      </div>
-    </td>
-  </tr>
+<div style="text-align:center">
+  <h1 class="w3-jumbo"><b>FIT.SELF</b></h1>
+  <p>Your Personal Trainer at Home</p>
+</div>
+<div>
+  <table cellspacing="0" cellpadding="0">
+    <tr>
+      <td>
+        <div id="videocontainer">
+          <video width="50%" controls>
+            <source src="fitself.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+          </video>
+        </div>
+      </td>
+      <td>
+        <div id="container">
+          <canvas class="rightside-block" id="canvasOutput" width=50%></canvas>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
 <div class="invisible">
   <input type="checkbox" id="face" name="classifier" value="face" checked>
   <label for="face">face</label>
