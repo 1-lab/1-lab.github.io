@@ -1,56 +1,50 @@
 let videoWidth, videoHeight;
 
 let qvga = {width: {exact: 320}, height: {exact: 240}};
-
 let vga = {width: {exact: 640}, height: {exact: 480}};
-
-let resolution = window.innerWidth < 640 ? qvga : vga;
+let resolution = window.innerWidth < 640 ? vga : vga;
 
 // whether streaming video from the camera.
 let streaming = false;
 
-let video = document.getElementById('video');
+let camvideo = document.getElementById('camvideo');
 let canvasOutput = document.getElementById('canvasOutput');
 let canvasOutputCtx = canvasOutput.getContext('2d');
 let stream = null;
 
-let detectFace = document.getElementById('face');
-
-let info = document.getElementById('info');
+let cardioImg = document.getElementById('cardio');
+let loadingInfo = document.getElementById('info');
+var lessonVideo = document.getElementById('lessonvideo');
+var lessonVideoSrc = document.getElementById('lessonvideosrc');
 
 function startCamera() {
   if (streaming) return;
   navigator.mediaDevices.getUserMedia({video: resolution, audio: false})
     .then(function(s) {
     stream = s;
-    video.srcObject = s;
-    video.play();
+    camvideo.srcObject = s;
+    camvideo.play();
   })
     .catch(function(err) {
     console.log("An error occured! " + err);
   });
 
-  video.addEventListener("canplay", function(ev){
+  camvideo.addEventListener("canplay", function(ev){
     if (!streaming) {
-      videoWidth = video.videoWidth;
-      videoHeight = video.videoHeight;
-      video.setAttribute("width", videoWidth);
-      video.setAttribute("height", videoHeight);
+      videoWidth = camvideo.videoWidth;
+      videoHeight = camvideo.videoHeight;
+      camvideo.setAttribute("width", videoWidth);
+      camvideo.setAttribute("height", videoHeight);
       canvasOutput.width = videoWidth;
       canvasOutput.height = videoHeight;
       streaming = true;
     }
     startVideoProcessing();
+    playLessonVideo();
   }, false);
 }
 
 let faceClassifier = null;
-let eyeClassifier = null;
-
-let src = null;
-let dstC1 = null;
-let dstC3 = null;
-let dstC4 = null;
 
 let canvasInput = null;
 let canvasInputCtx = null;
@@ -77,75 +71,82 @@ function startVideoProcessing() {
   faceClassifier = new cv.CascadeClassifier();
   faceClassifier.load('haarcascade_frontalface_default.xml');
   
-  eyeClassifier = new cv.CascadeClassifier();
-  eyeClassifier.load('haarcascade_eye.xml');
-  
   requestAnimationFrame(processVideo);
 }
 
 function processVideo() {
   stats.begin();
-  canvasInputCtx.drawImage(video, 0, 0, videoWidth, videoHeight);
+  canvasInputCtx.drawImage(camvideo, 0, 0, videoWidth, videoHeight);
   let imageData = canvasInputCtx.getImageData(0, 0, videoWidth, videoHeight);
   srcMat.data.set(imageData.data);
   cv.cvtColor(srcMat, grayMat, cv.COLOR_RGBA2GRAY);
   let faces = [];
-  let eyes = [];
   let size;
-  if (detectFace.checked) {
-    let faceVect = new cv.RectVector();
-    let faceMat = new cv.Mat();
-    cv.pyrDown(grayMat, faceMat);
-    if (videoWidth > 320)
-      cv.pyrDown(faceMat, faceMat);
-    size = faceMat.size();
-    faceClassifier.detectMultiScale(faceMat, faceVect);
-    for (let i = 0; i < faceVect.size(); i++) {
-      let face = faceVect.get(i);
-      faces.push(new cv.Rect(face.x, face.y, face.width, face.height));
-    }
-    faceMat.delete();
-    faceVect.delete();
+
+  let faceVect = new cv.RectVector();
+  let faceMat = new cv.Mat();
+  cv.pyrDown(grayMat, faceMat);
+  if (videoWidth > 320)
+    cv.pyrDown(faceMat, faceMat);
+  size = faceMat.size();
+  faceClassifier.detectMultiScale(faceMat, faceVect);
+  for (let i = 0; i < faceVect.size(); i++) {
+    let face = faceVect.get(i);
+    faces.push(new cv.Rect(face.x, face.y, face.width, face.height));
   }
+  faceMat.delete();
+  faceVect.delete();
+
   canvasOutputCtx.drawImage(canvasInput, 0, 0, videoWidth, videoHeight);
-  drawResults(canvasOutputCtx, faces, 'red', size);
-  drawResults(canvasOutputCtx, eyes, 'yellow', size);
+  drawResults(canvasOutputCtx, faces, size);
   stats.end();
   requestAnimationFrame(processVideo);
 }
 
-function drawResults(ctx, results, color, size) {
+function drawResults(ctx, results, size) {
   for (let i = 0; i < results.length; ++i) {
     let rect = results[i];
     let xRatio = videoWidth/size.width;
     let yRatio = videoHeight/size.height;
-    ctx.lineWidth = 3;
-    ctx.strokeStyle = color;
-    ctx.strokeRect(rect.x*xRatio, rect.y*yRatio, rect.width*xRatio, rect.height*yRatio);
+    ctx.drawImage(cardioImg, (rect.x-64+rect.width/2)*xRatio, rect.y*yRatio);
+    console.log(rect.y);
   }
 }
 
 function stopVideoProcessing() {
-  if (src != null && !src.isDeleted()) src.delete();
-  if (dstC1 != null && !dstC1.isDeleted()) dstC1.delete();
-  if (dstC3 != null && !dstC3.isDeleted()) dstC3.delete();
-  if (dstC4 != null && !dstC4.isDeleted()) dstC4.delete();
 }
 
 function stopCamera() {
   if (!streaming) return;
   stopVideoProcessing();
   document.getElementById("canvasOutput").getContext("2d").clearRect(0, 0, width, height);
-  video.pause();
-  video.srcObject=null;
+  camvideo.pause();
+  camvideo.srcObject=null;
   stream.getVideoTracks()[0].stop();
   streaming = false;
+}
+
+function playEnded() {
+  //lessonVideo.currentTIme = 0;
+  //lessonVideo.play();
+  lessonVideo.pause();
+  lessonVideoSrc.setAttribute('src', "lesson2.mp4");
+  lessonVideo.load();
+  lessonVideo.play();
+}
+
+function playLessonVideo() {
+  lessonVideo.currentTIme = 0;
+  lessonVideo.play();
 }
 
 function initUI() {
   stats = new Stats();
   stats.showPanel(0);
   document.getElementById('container').appendChild(stats.dom);
+  lessonVideo = document.getElementById('lessonvideo');
+  lessonVideoSrc = document.getElementById('lessonvideosrc');
+  lessonVideo.addEventListener("ended", playEnded, false);
 }
 
 function opencvIsReady() {
@@ -154,7 +155,54 @@ function opencvIsReady() {
     console.log('Requred features are not ready.');
     return;
   }
-  info.innerHTML = '';
+  loadingInfo.innerHTML = '';
   initUI();
   startCamera();
+}
+
+var fsm = new StateMachine({
+  init: 'idle',
+  transitions: [
+    { name: 'facedetected', from: 'idle',        to: 'greeting' },
+    { name: 'facedetected', from: 'greeting',    to: 'exercise' },
+    { name: 'slowdetected', from: 'exercise',    to: 'encourage' },
+    { name: 'gooddetected', from: 'exercise',    to: 'excellent' },
+    { name: 'facedetected', from: 'encouraging', to: 'saygoodbye' },
+    { name: 'facedetected', from: 'excellent',   to: 'saygoodbye' },
+    { name: 'facedetected', from: 'saygoodbye',  to: 'idle' },
+  ],
+  methods: {
+    onFaceDetected: function() { console.log('Face detected')      },
+    onSlowDetected: function() { console.log('Slow pace detected') },
+    onGoodDetected: function() { console.log('Good pace detected') },
+  }
+});
+
+function templates() {
+  if(false/*opencv detect a face*/)
+    fsm.facedetected();
+  if(false/*count below threshold*/)
+    fsm.slowdetected();
+  if(false/*count over threshold*/)
+    fsm.gooddetected();
+}
+
+function onFaceDetected() {
+  switch(fsm.state) {
+    case 'idle':
+      play('greeting');
+      break;
+    case 'greeting':
+      play('exercise');
+      break;
+    case 'encouraging':
+      play('saygoodbye');
+      break;
+    case 'excellent':
+      play('saygoodbye');
+      break;
+    case 'saygoodbye':
+      play('idle');
+      break;
+  }
 }
