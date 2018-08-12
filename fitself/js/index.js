@@ -17,6 +17,7 @@ let loadingInfo = document.getElementById('info');
 var lessonVideo = document.getElementById('lessonvideo');
 var lessonVideoSrc = document.getElementById('lessonvideosrc');
 
+// Setup camera
 function startCamera() {
   if (streaming) return;
   navigator.mediaDevices.getUserMedia({video: resolution, audio: false})
@@ -44,6 +45,7 @@ function startCamera() {
   }, false);
 }
 
+// Start video processing
 let faceClassifier = null;
 
 let canvasInput = null;
@@ -74,6 +76,7 @@ function startVideoProcessing() {
   requestAnimationFrame(processVideo);
 }
 
+// Video processing loop
 function processVideo() {
   stats.begin();
   canvasInputCtx.drawImage(camvideo, 0, 0, videoWidth, videoHeight);
@@ -103,6 +106,7 @@ function processVideo() {
   requestAnimationFrame(processVideo);
 }
 
+// Drawing fitself emoticon
 function drawResults(ctx, results, size) {
   for (let i = 0; i < results.length; ++i) {
     let rect = results[i];
@@ -113,33 +117,7 @@ function drawResults(ctx, results, size) {
   }
 }
 
-function stopVideoProcessing() {
-}
-
-function stopCamera() {
-  if (!streaming) return;
-  stopVideoProcessing();
-  document.getElementById("canvasOutput").getContext("2d").clearRect(0, 0, width, height);
-  camvideo.pause();
-  camvideo.srcObject=null;
-  stream.getVideoTracks()[0].stop();
-  streaming = false;
-}
-
-function playEnded() {
-  //lessonVideo.currentTIme = 0;
-  //lessonVideo.play();
-  lessonVideo.pause();
-  lessonVideoSrc.setAttribute('src', "lesson2.mp4");
-  lessonVideo.load();
-  lessonVideo.play();
-}
-
-function playLessonVideo() {
-  lessonVideo.currentTIme = 0;
-  lessonVideo.play();
-}
-
+// Initialize
 function initUI() {
   stats = new Stats();
   stats.showPanel(0);
@@ -160,6 +138,40 @@ function opencvIsReady() {
   startCamera();
 }
 
+// Closing
+function stopVideoProcessing() {
+}
+
+function stopCamera() {
+  if (!streaming) return;
+  stopVideoProcessing();
+  document.getElementById("canvasOutput").getContext("2d").clearRect(0, 0, width, height);
+  camvideo.pause();
+  camvideo.srcObject=null;
+  stream.getVideoTracks()[0].stop();
+  streaming = false;
+}
+
+// Play video & callback
+function playVideo(file) {
+  lessonVideo.pause();
+  lessonVideoSrc.setAttribute('src', file);
+  lessonVideo.load();
+  //lessonVideo.currentTime = 0;
+  lessonVideo.play();
+}
+
+function playLessonVideo() {
+  lessonVideo.currentTime = 0;
+  lessonVideo.play();
+}
+
+function playEnded() {
+  triggerfsm();
+  //playVideo("lesson2.mp4");
+}
+
+// State machine
 var fsm = new StateMachine({
   init: 'idle',
   transitions: [
@@ -178,31 +190,44 @@ var fsm = new StateMachine({
   }
 });
 
-function templates() {
-  if(false/*opencv detect a face*/)
-    fsm.facedetected();
-  if(false/*count below threshold*/)
-    fsm.slowdetected();
-  if(false/*count over threshold*/)
-    fsm.gooddetected();
-}
-
 function onFaceDetected() {
   switch(fsm.state) {
     case 'idle':
-      play('greeting');
+      console.log("greeting");
+      playVideo("greeting.mp4");
       break;
     case 'greeting':
-      play('exercise');
+      console.log("exercise");
+      playVideo("exercise.mp4");
       break;
     case 'encouraging':
-      play('saygoodbye');
+      console.log("saygoodbye");
+      playVideo("saygoodbye.mp4");
       break;
     case 'excellent':
-      play('saygoodbye');
+      console.log("saygoodbye");
+      playVideo("saygoodbye.mp4");
       break;
     case 'saygoodbye':
-      play('idle');
+      console.log("idle");
+      playVideo("idle.mp4");
       break;
   }
+}
+
+function triggerfsm() {
+  if(checkifFacedetected())
+    fsm.facedetected();
+  if(checkFitTempoSlow())
+    fsm.slowdetected();
+  else
+    fsm.gooddetected();
+}
+
+function checkifFacedetected() {
+  return true;
+}
+
+function checkFitTempoSlow() {
+  return true;
 }
