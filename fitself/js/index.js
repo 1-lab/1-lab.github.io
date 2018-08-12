@@ -106,6 +106,13 @@ function processVideo() {
   requestAnimationFrame(processVideo);
 }
 
+// Calc fitself tempo
+// https://stackoverflow.com/questions/22583391/peak-signal-detection-in-realtime-timeseries-data
+// return the number of moving motion
+
+// Check if face detected
+// return face detecting count in last few seconds
+
 // Drawing fitself emoticon
 function drawResults(ctx, results, size) {
   for (let i = 0; i < results.length; ++i) {
