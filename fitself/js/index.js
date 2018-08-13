@@ -7,7 +7,7 @@ let resolution = window.innerWidth < 640 ? vga : vga;
 // whether streaming video from the camera.
 let streaming = false;
 
-let camvideo = document.getElementById('camvideo');
+let camvideo = document.getElementById('video');
 let canvasOutput = document.getElementById('canvasOutput');
 let canvasOutputCtx = canvasOutput.getContext('2d');
 let stream = null;
@@ -41,7 +41,7 @@ function startCamera() {
       streaming = true;
     }
     startVideoProcessing();
-    playLessonVideo();
+    playVideo("lesson1.mp4");
   }, false);
 }
 
@@ -120,7 +120,7 @@ function drawResults(ctx, results, size) {
     let xRatio = videoWidth/size.width;
     let yRatio = videoHeight/size.height;
     ctx.drawImage(cardioImg, (rect.x-64+rect.width/2)*xRatio, rect.y*yRatio);
-    console.log(rect.y);
+    //console.log(rect.y);
   }
 }
 
@@ -128,7 +128,7 @@ function drawResults(ctx, results, size) {
 function initUI() {
   stats = new Stats();
   stats.showPanel(0);
-  document.getElementById('container').appendChild(stats.dom);
+  document.getElementById('camvideo').appendChild(stats.dom);
   lessonVideo = document.getElementById('lessonvideo');
   lessonVideoSrc = document.getElementById('lessonvideosrc');
   lessonVideo.addEventListener("ended", playEnded, false);
@@ -168,14 +168,8 @@ function playVideo(file) {
   lessonVideo.play();
 }
 
-function playLessonVideo() {
-  lessonVideo.currentTime = 0;
-  lessonVideo.play();
-}
-
 function playEnded() {
   triggerfsm();
-  //playVideo("lesson2.mp4");
 }
 
 // State machine
@@ -189,6 +183,7 @@ var fsm = new StateMachine({
     { name: 'facedetected', from: 'encouraging', to: 'saygoodbye' },
     { name: 'facedetected', from: 'excellent',   to: 'saygoodbye' },
     { name: 'facedetected', from: 'saygoodbye',  to: 'idle' },
+    { name: 'slowdetected', from: 'greeting',    to: 'greeting' },
   ],
   methods: {
     onFaceDetected: function() { console.log('Face detected')      },
@@ -223,6 +218,7 @@ function onFaceDetected() {
 }
 
 function triggerfsm() {
+  console.log('fsm triggered');
   if(checkifFacedetected())
     fsm.facedetected();
   if(checkFitTempoSlow())
