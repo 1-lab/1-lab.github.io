@@ -177,13 +177,12 @@ var fsm = new StateMachine({
   init: 'idle',
   transitions: [
     { name: 'facedetected', from: 'idle',        to: 'greeting' },
-    { name: 'facedetected', from: 'greeting',    to: 'exercise' },
+//    { name: 'facedetected', from: 'greeting',    to: 'exercise' },
     { name: 'slowdetected', from: 'exercise',    to: 'encourage' },
     { name: 'gooddetected', from: 'exercise',    to: 'excellent' },
-    { name: 'facedetected', from: 'encouraging', to: 'saygoodbye' },
-    { name: 'facedetected', from: 'excellent',   to: 'saygoodbye' },
-    { name: 'facedetected', from: 'saygoodbye',  to: 'idle' },
-    { name: 'slowdetected', from: 'greeting',    to: 'greeting' },
+//    { name: 'facedetected', from: 'encouraging', to: 'saygoodbye' },
+//    { name: 'facedetected', from: 'excellent',   to: 'saygoodbye' },
+//    { name: 'facedetected', from: 'saygoodbye',  to: 'idle' },
   ],
   methods: {
     onFaceDetected: function() { console.log('Face detected')      },
@@ -192,7 +191,9 @@ var fsm = new StateMachine({
   }
 });
 
-function onFaceDetected() {
+function onFaceDetected_test() {
+  console.log('onFaceDetected:'+fsm.state);
+
   switch(fsm.state) {
     case 'idle':
       console.log("greeting");
@@ -219,12 +220,20 @@ function onFaceDetected() {
 
 function triggerfsm() {
   console.log('fsm triggered');
-  if(checkifFacedetected())
-    fsm.facedetected();
-  if(checkFitTempoSlow())
+
+  if(checkFitTempoSlow() && fsm.can('slowdetected')) {
+    console.log('fsm/slowdetected');
     fsm.slowdetected();
-  else
+  }
+  else if(fsm.can('gooddetected')) {
+    console.log('fsm/gooddetected');
     fsm.gooddetected();
+  }
+
+  if(checkifFacedetected() && fsm.can('facedetected')) {
+    console.log('fsm/facedetected');
+    fsm.facedetected();
+  }
 }
 
 function checkifFacedetected() {
