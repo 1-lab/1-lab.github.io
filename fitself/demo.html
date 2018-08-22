@@ -35,7 +35,7 @@
       <td style="width:50%">
         <div id="lessonvideocontainer">
           <video id="lessonvideo" width="100%" controls>
-            <source id="lessonvideosrc" src="lesson1.mp4" type="video/mp4">
+            <source id="lessonvideosrc" src="lesson/s0.mp4" type="video/mp4">
             Your browser does not support HTML5 video.
           </video>
           <!--
@@ -71,6 +71,8 @@
 var featuresReady = checkFeatures(document.getElementById("info"), {webrtc: true, wasm: true});
 </script>
 <script src="js/state-machine.js"></script>
+<script src="js/math.min.js"></script>
+<script src="js/detectPeak.js"></script>
 <script src="js/index.js"></script>
 <script>
 var Module = {
