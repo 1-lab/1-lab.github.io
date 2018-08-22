@@ -17,6 +17,9 @@ let loadingInfo = document.getElementById('info');
 var lessonVideo = document.getElementById('lessonvideo');
 var lessonVideoSrc = document.getElementById('lessonvideosrc');
 
+var count = 0;
+var values = [];
+
 // Setup camera
 function startCamera() {
   if (streaming) return;
@@ -41,7 +44,7 @@ function startCamera() {
       streaming = true;
     }
     startVideoProcessing();
-    playVideo("lesson1.mp4");
+    playVideo("lesson/s0.mp4");
   }, false);
 }
 
@@ -93,9 +96,12 @@ function processVideo() {
     cv.pyrDown(faceMat, faceMat);
   size = faceMat.size();
   faceClassifier.detectMultiScale(faceMat, faceVect);
-  for (let i = 0; i < faceVect.size(); i++) {
-    let face = faceVect.get(i);
+  //for (let i = 0; i < faceVect.size(); i++) {
+  if(faceVect.size() > 0) {
+    //let face = faceVect.get(i);
+    let face = faceVect.get(0);
     faces.push(new cv.Rect(face.x, face.y, face.width, face.height));
+    values.push(face.y);
   }
   faceMat.delete();
   faceVect.delete();
@@ -122,6 +128,9 @@ function drawResults(ctx, results, size) {
     ctx.drawImage(cardioImg, (rect.x-64+rect.width/2)*xRatio, rect.y*yRatio);
     //console.log(rect.y);
   }
+  ctx.font = "100px Arial";
+  ctx.fillStyle = "yellow";
+  ctx.fillText(detectPeaks(values), 30, 100);
 }
 
 // Initialize
@@ -177,62 +186,97 @@ var fsm = new StateMachine({
   init: 'idle',
   transitions: [
     { name: 'facedetected', from: 'idle',        to: 'greeting' },
-//    { name: 'facedetected', from: 'greeting',    to: 'exercise' },
-    { name: 'slowdetected', from: 'exercise',    to: 'encourage' },
+    { name: 'facedetected', from: 'greeting',    to: 'exercise' },
+    { name: 'slowdetected', from: 'exercise',    to: 'encouraging' },
     { name: 'gooddetected', from: 'exercise',    to: 'excellent' },
-//    { name: 'facedetected', from: 'encouraging', to: 'saygoodbye' },
-//    { name: 'facedetected', from: 'excellent',   to: 'saygoodbye' },
-//    { name: 'facedetected', from: 'saygoodbye',  to: 'idle' },
+    { name: 'facedetected', from: 'encouraging', to: 'saygoodbye' },
+    { name: 'facedetected', from: 'excellent',   to: 'saygoodbye' },
+    { name: 'facedetected', from: 'saygoodbye',  to: 'idle' },
   ],
   methods: {
-    onFaceDetected: function() { console.log('Face detected')      },
-    onSlowDetected: function() { console.log('Slow pace detected') },
-    onGoodDetected: function() { console.log('Good pace detected') },
+    faceDetected: function() { console.log('Face detected'); onFaceDetected();      },
+    slowDetected: function() { console.log('Slow pace detected'); onSlowDetected(); },
+    goodDetected: function() { console.log('Good pace detected'); onGoodDetect(); },
   }
 });
 
-function onFaceDetected_test() {
+function onFaceDetected() {
   console.log('onFaceDetected:'+fsm.state);
 
   switch(fsm.state) {
     case 'idle':
       console.log("greeting");
-      playVideo("greeting.mp4");
+      count = 0;
+      values = [];
+      playVideo("lesson/s2.mp4");
+      fsm.facedetected();
       break;
     case 'greeting':
       console.log("exercise");
-      playVideo("exercise.mp4");
+      playVideo("lesson/s3.mp4");
+      fsm.facedetected();
       break;
     case 'encouraging':
       console.log("saygoodbye");
-      playVideo("saygoodbye.mp4");
+      playVideo("lesson/s5.mp4");
+      fsm.facedetected();
       break;
     case 'excellent':
       console.log("saygoodbye");
-      playVideo("saygoodbye.mp4");
+      playVideo("lesson/s4.mp4");
+      fsm.facedetected();
       break;
     case 'saygoodbye':
       console.log("idle");
-      playVideo("idle.mp4");
+      playVideo("lesson/s8.mp4");
+      fsm.facedetected();
+      break;
+  }
+}
+
+function onSlowDetected() {
+  console.log('onSlowDetected:'+fsm.state);
+
+  switch(fsm.state) {
+    case 'exercise':
+      console.log("encouraging");
+      count = 0;
+      values = [];
+      playVideo("lesson/s5.mp4");
+      fsm.slowdetected();
+      break;
+  }
+}
+
+function onGoodDetected() {
+  console.log('onGoodDetected:'+fsm.state);
+
+  switch(fsm.state) {
+    case 'exercise':
+      console.log("excellent");
+      count = 0;
+      values = [];
+      playVideo("lesson/s6.mp4");
+      fsm.gooddetected();
       break;
   }
 }
 
 function triggerfsm() {
-  console.log('fsm triggered');
+  console.log('fsm triggered @', fsm.state);
 
   if(checkFitTempoSlow() && fsm.can('slowdetected')) {
     console.log('fsm/slowdetected');
-    fsm.slowdetected();
+    fsm.slowDetected();
   }
   else if(fsm.can('gooddetected')) {
     console.log('fsm/gooddetected');
-    fsm.gooddetected();
+    fsm.goodDetected();
   }
 
   if(checkifFacedetected() && fsm.can('facedetected')) {
     console.log('fsm/facedetected');
-    fsm.facedetected();
+    fsm.faceDetected();
   }
 }
 
@@ -241,5 +285,9 @@ function checkifFacedetected() {
 }
 
 function checkFitTempoSlow() {
-  return true;
+  if(detectPeaks(values) < 5) {
+    return true;
+  } else {
+    return false;
+  }
 }
