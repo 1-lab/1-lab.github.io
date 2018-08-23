@@ -6,14 +6,19 @@
 function detectPeaks(values) {
   // Settings (the ones below are examples: choose what is best for your data)
   const lag = 20;          // lag 5 for the smoothing functions
-  const threshold = 3.5;  // 3.5 standard deviations for signal
+  const threshold = 4.0;  // 3.5 standard deviations for signal
   const influence = 0.5;  // between 0 and 1, where 1 is normal influence, 0.5 is half
 
   let count = 0;
+  let countok = 0;
   let detect = [];
   let avgFilter = [];
   let stdFilter = [];
   let filteredY = [];
+
+  if(values.length < lag) {
+    return 0;
+  }
   
   filteredY = values.slice(0, lag);
 
@@ -28,12 +33,14 @@ function detectPeaks(values) {
   for(let i=lag; i<values.length; i++) {
     if(math.abs(values[i] - avgFilter[i-1]) > threshold*stdFilter[i-1]) {
       if(values[i] > avgFilter[i-1]) {
-        detect[i] = 1;                     // Positive signal
+        detect[i] = 1;
+        countok = 1;
       }
       else {
-        detect[i] = -1;                     // Negative signal
-        if(detect[i-1] === 0) {
+        detect[i] = -1; 
+        if(detect[i-1] == 0 && countok == 1) {
           count++;
+          countok = 0;
         }
       }
       // Make influence lower
@@ -47,6 +54,6 @@ function detectPeaks(values) {
     avgFilter[i] = math.mean(filteredY.slice(i-lag, i));
     stdFilter[i] = math.std(filteredY.slice(i-lag, i));
   }
-  //console.log('count:', count);
+  //console.log('count:', count, detect, values);
   return count;
 }
