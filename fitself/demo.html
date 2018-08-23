@@ -32,21 +32,16 @@
 <div>
   <table cellspacing="0" cellpadding="0">
     <tr>
-      <td style="width:50%">
+      <td style="width:1000px">
         <div id="lessonvideocontainer">
           <video id="lessonvideo" width="100%" controls>
             <source id="lessonvideosrc" src="lesson/s0.mp4" type="video/mp4">
             Your browser does not support HTML5 video.
           </video>
-          <!--
-          <iframe width="560" height="315" 
-            src="https://www.youtube.com/embed/mGvzVjuY8SY?playlist=mGvzVjuY8SY&loop=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
-          </iframe>
-          -->
         </div>
       </td>
-      <td style="width:50%; height=315px">
-        <div id="camvideo">
+      <td>
+        <div id="camvideo" style="float:left">
           <canvas class="rightside-block" id="canvasOutput"></canvas>
         </div>
       </td>
@@ -61,7 +56,7 @@
   <video id="video" class="hidden">Your browser does not support the video tag.</video>
 </div>
 <div class="invisible">
-  <img id="cardio" class="hidden" src="cardio3.png">
+  <img id="cardio" class="hidden" src="cardiogram.png">
 </div>
 <script src="libs/adapter-latest.js"></script>
 <script src="libs/stats.min.js"></script>
