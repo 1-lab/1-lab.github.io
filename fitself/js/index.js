@@ -2,7 +2,7 @@ let videoWidth, videoHeight;
 
 let qvga = {width: {exact: 320}, height: {exact: 240}};
 let vga = {width: {exact: 640}, height: {exact: 480}};
-let resolution = window.innerWidth < 640 ? vga : vga;
+let resolution = window.innerWidth < 640 ? qvga : vga;
 
 // whether streaming video from the camera.
 let streaming = false;
@@ -112,13 +112,6 @@ function processVideo() {
   requestAnimationFrame(processVideo);
 }
 
-// Calc fitself tempo
-// https://stackoverflow.com/questions/22583391/peak-signal-detection-in-realtime-timeseries-data
-// return the number of moving motion
-
-// Check if face detected
-// return face detecting count in last few seconds
-
 // Drawing fitself emoticon
 function drawResults(ctx, results, size) {
   for (let i = 0; i < results.length; ++i) {
@@ -128,7 +121,7 @@ function drawResults(ctx, results, size) {
     ctx.drawImage(cardioImg, (rect.x-64+rect.width/2)*xRatio, rect.y*yRatio);
     //console.log(rect.y);
   }
-  ctx.font = "100px Arial";
+  ctx.font = "80px Arial";
   ctx.fillStyle = "yellow";
   ctx.fillText(detectPeaks(values), 30, 100);
 }
@@ -173,7 +166,7 @@ function playVideo(file) {
   lessonVideo.pause();
   lessonVideoSrc.setAttribute('src', file);
   lessonVideo.load();
-  //lessonVideo.currentTime = 0;
+  lessonVideo.currentTime = 0;
   lessonVideo.play();
 }
 
@@ -196,7 +189,7 @@ var fsm = new StateMachine({
   methods: {
     faceDetected: function() { console.log('Face detected'); onFaceDetected();      },
     slowDetected: function() { console.log('Slow pace detected'); onSlowDetected(); },
-    goodDetected: function() { console.log('Good pace detected'); onGoodDetect(); },
+    goodDetected: function() { console.log('Good pace detected'); onGoodDetected(); },
   }
 });
 
@@ -213,6 +206,7 @@ function onFaceDetected() {
       break;
     case 'greeting':
       console.log("exercise");
+      values = [];
       playVideo("lesson/s3.mp4");
       fsm.facedetected();
       break;
@@ -240,8 +234,6 @@ function onSlowDetected() {
   switch(fsm.state) {
     case 'exercise':
       console.log("encouraging");
-      count = 0;
-      values = [];
       playVideo("lesson/s5.mp4");
       fsm.slowdetected();
       break;
@@ -254,8 +246,6 @@ function onGoodDetected() {
   switch(fsm.state) {
     case 'exercise':
       console.log("excellent");
-      count = 0;
-      values = [];
       playVideo("lesson/s6.mp4");
       fsm.gooddetected();
       break;
