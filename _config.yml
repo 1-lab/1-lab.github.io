@@ -16,7 +16,7 @@ resume: false
 resume-external: false
 resume-url: https://google.com/?q=my+resume
 
-url: https://sangkyuh.github.io/
+url: https://sangkyuai.github.io/
 # your url: http://USERNAME.github.io
 
 permalink: /:title/
@@ -39,7 +39,7 @@ pinterest: sangkyulab
 youtube: qsilverr7
 instagram: quicksilversangkyu
 facebook: quicksilversangkyu
-github: sangkyuh
+github: sangkyuai
 # twitter: mytwitter
 # google: mygoogle
 # linkedin: mylinkedin
