@@ -11,7 +11,10 @@
 - [ ] Daily commit challenge (coding, posting)
 - [ ] Daily check challenge (42jrs; four 2 juniors)
 
+
+
 > Written with [StackEdit](https://stackedit.io/).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwMzkwMzc2OTldfQ==
+eyJoaXN0b3J5IjpbLTE5NDg5OTY3NzUsLTIwMzkwMzc2OTldfQ
+==
 -->
