@@ -11,10 +11,9 @@
 - [ ] Daily commit challenge (coding, posting)
 - [ ] Daily check challenge (42jrs; four 2 juniors)
 
-
-
+ipad에서 쓰기엔 뭔가 불편하다.
+좀 더 큰 해상도나 키보드가 필요하다.
 > Written with [StackEdit](https://stackedit.io/).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NDg5OTY3NzUsLTIwMzkwMzc2OTldfQ
-==
+eyJoaXN0b3J5IjpbLTgwODE3MzI0MCwtMjAzOTAzNzY5OV19
 -->
